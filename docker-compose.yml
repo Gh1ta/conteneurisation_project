@@ -1,0 +1,32 @@
+version: "2"
+services:
+  frontend:
+   image: frontend
+   stdin_open: true
+   ports:
+      - "80:80"
+   networks:
+      - app-network
+  backend:
+   image: backend
+   ports:
+      - "5000:5000"
+   networks:
+      - app-network
+   depends_on:
+      - mongodb-service
+  mongodb-service:
+   image: mongo
+   ports:
+      - "27017:27017"
+   networks:
+      - app-network
+   volumes:
+      - mongo-data:/app
+networks:
+   app-network:
+      driver: bridge
+
+volumes:
+   mongo-data:
+      driver: local

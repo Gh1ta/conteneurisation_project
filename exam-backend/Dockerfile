@@ -1,12 +1,12 @@
-FROM node
+FROM node:alpine
+
+ENV NODE_ENV=production
 
 WORKDIR /app
 
 COPY package*.json ./
 
 RUN npm install
-
-RUN npm audit fix
 
 COPY . .
 

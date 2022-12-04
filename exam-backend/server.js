@@ -24,9 +24,10 @@ app.use('/api/', (req, res, next) => {
     next();
 });
 
+console.log(process.env.MONGO_INITDB_ROOT_USERNAME, process.env.MONGO_INITDB_ROOT_PASSWORD)
+
 mongoose
-    .connect(
-        `mongodb://mongodb-service:27017/exam`, {
+    .connect("mongodb://"+process.env.MONGO_INITDB_ROOT_USERNAME+":"+process.env.MONGO_INITDB_ROOT_PASSWORD+"@mongodb-service/exam?authSource=admin", {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
@@ -118,6 +119,6 @@ app.get('/', (req, res) => {
     res.send('server up and running.');
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 server.listen(port, () => console.log(`Server v8 up and running on port ${port} !`));

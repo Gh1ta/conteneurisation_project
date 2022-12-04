@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  namespace: exam
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb-container
+        image: mongo
+        ports:
+        - name: mongodb-port
+          containerPort: 27017
+          protocol: TCP
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: USER_NAME
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: PASSWORD
+        volumeMounts:
+          - mountPath: /data/db
+            name: db-storage
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: server-pv-claim

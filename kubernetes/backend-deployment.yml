@@ -4,7 +4,7 @@ metadata:
   name: backend-deployment
   namespace: exam
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: gh1ta/mini-projet:backendiv10
+          image: gh1ta/mini-projet:backendv11
           ports:
             - containerPort: 8000
               name: nodejs-port
@@ -27,7 +27,25 @@ spec:
               secretKeyRef:
                 name: mysecret
                 key: PASSWORD
-          
+          livenessProbe:
+            httpGet:
+              port: nodejs-port
+              path: /health
+            initialDelaySeconds: 15
+            timeoutSeconds: 30
+          readinessProbe:
+            httpGet:
+              port: nodejs-port
+              path: /ready
+            initialDelaySeconds: 15
+            timeoutSeconds: 30
+          startupProbe:
+            httpGet:
+              port: nodejs-port
+              path: /start
+            initialDelaySeconds: 15
+            timeoutSeconds: 30
+
   selector:
     matchLabels:
       app: backend

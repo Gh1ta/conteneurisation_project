@@ -24,8 +24,6 @@ app.use('/api/', (req, res, next) => {
     next();
 });
 
-console.log(process.env.MONGO_INITDB_ROOT_USERNAME, process.env.MONGO_INITDB_ROOT_PASSWORD)
-
 mongoose
     .connect("mongodb://"+process.env.MONGO_INITDB_ROOT_USERNAME+":"+process.env.MONGO_INITDB_ROOT_PASSWORD+"@mongodb-service/exam?authSource=admin", {
             useNewUrlParser: true,
@@ -117,6 +115,18 @@ app.use("/api/jobs", jobs);
 
 app.get('/', (req, res) => {
     res.send('server up and running.');
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).send();
+});
+
+app.get('/ready', (req, res) => {
+    res.status(200).send();
+});
+
+app.get('/start', (req, res) => {
+    res.status(200).send();
 });
 
 const port = process.env.PORT || 8000;

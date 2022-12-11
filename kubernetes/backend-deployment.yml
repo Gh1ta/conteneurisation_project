@@ -12,21 +12,16 @@ spec:
     spec:
       containers:
         - name: backend
-          image: gh1ta/mini-projet:backendv11
+          image: gh1ta/mini-projet:backendv12
           ports:
             - containerPort: 8000
               name: nodejs-port
           env:
-          - name: MONGO_INITDB_ROOT_USERNAME
+          - name: "CONNECTION_STRING"
             valueFrom:
               secretKeyRef:
-                name: mysecret
-                key: USER_NAME
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mysecret
-                key: PASSWORD
+                name: mongodb-instance-admin-my-user
+                key: connectionString.standardSrv
           livenessProbe:
             httpGet:
               port: nodejs-port

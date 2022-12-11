@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: gh1ta/mini-projet:frontendv4
+          image: gh1ta/mini-projet:frontendv3
           ports:
             - containerPort: 80
               name: http-port

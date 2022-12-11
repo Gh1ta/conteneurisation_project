@@ -4,9 +4,9 @@ metadata:
   name: server-pv-claim
   namespace: exam
 spec:
+  storageClassName: local-storage
   accessModes:
     - ReadWriteOnce
-  storageClassName: ""
   resources:
     requests:
       storage: 1Gi

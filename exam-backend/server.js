@@ -24,8 +24,10 @@ app.use('/api/', (req, res, next) => {
     next();
 });
 
+const url = process.env.CONNECTION_STRING;
+
 mongoose
-    .connect("mongodb://"+process.env.MONGO_INITDB_ROOT_USERNAME+":"+process.env.MONGO_INITDB_ROOT_PASSWORD+"@mongodb-service/exam?authSource=admin", {
+    .connect(url , {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })

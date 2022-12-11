@@ -1,13 +1,21 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: server-pv-volume
-  labels:
-    type: local
+   name: server-pv
 spec:
+  storageClassName: local-storage
+  persistentVolumeReclaimPolicy: Retain
   capacity:
     storage: 5Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
+  local:
+    path: /data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - minikube

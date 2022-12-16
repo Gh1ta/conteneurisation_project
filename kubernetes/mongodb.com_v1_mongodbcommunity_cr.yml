@@ -1,9 +1,7 @@
----
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
   name: mongodb-instance
-  namespace: exam
 spec:
   members: 2
   type: ReplicaSet
@@ -31,11 +29,3 @@ spec:
 
 # the user credentials will be generated from this secret
 # once the credentials are generated, this secret is no longer required
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: my-user-password-mongo
-type: Opaque
-stringData:
-  password: mongodb12345

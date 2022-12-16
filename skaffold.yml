@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+  - imageName: backend_image
+    workspace: ./exam-backend
+  - imageName: frontend_image
+    workspace: ./exam-frontend
+  local: {}
+
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes/*.yml

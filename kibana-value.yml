@@ -1,0 +1,5 @@
+files:
+  kibana.yml:
+    server.name: kibana
+    server.host: "0"
+    elasticsearch.hosts

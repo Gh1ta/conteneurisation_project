@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
-  namespace: exam
 spec:
   replicas: 2
   template:
@@ -12,7 +11,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: gh1ta/mini-projet:backendv12
+          image: backend_image
           ports:
             - containerPort: 8000
               name: nodejs-port
